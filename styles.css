@@ -350,21 +350,34 @@ body {
   border-radius: 28px;
   padding: 2rem;
   backdrop-filter: blur(18px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.about-card h3,
-.feature-card h3,
-.contact-info h3,
+.about-card:hover,
+.feature-card:hover,
+.project-card:hover,
+.contact-info:hover,
+.contact-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 123, 255, 0.3);
+}
+
 .project-card h3 {
   margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--accent);
 }
 
-.about-card p,
-.feature-card p,
-.contact-info p,
 .project-card p {
   color: var(--muted);
   line-height: 1.8;
+  margin-bottom: 0.5rem;
+}
+
+.project-card p strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .feature-card {
