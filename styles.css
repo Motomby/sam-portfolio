@@ -569,9 +569,12 @@ body {
   .hero-section,
   .contact-grid,
   .about-grid,
-  .features-section,
-  .projects-grid {
+  .features-section {
     grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .hero-section {
@@ -622,6 +625,10 @@ body {
 
   .section-header h2 {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
   }
 }
 
