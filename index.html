@@ -159,6 +159,28 @@ I bridge the gap between sleek, responsive frontends and robust, scalable backen
     <p>© 2026 Sammy Dev taking tech to the next level.</p>
   </footer>
 
+  <!-- Chat Widget -->
+  <div class="chat-widget">
+    <button class="chat-button" id="chatButton" aria-label="Open chat">
+      <i class="fas fa-comments"></i>
+    </button>
+    <div class="chat-modal" id="chatModal">
+      <div class="chat-header">
+        <h3>Chat with Sammy</h3>
+        <button class="close-chat" id="closeChat">&times;</button>
+      </div>
+      <div class="chat-body">
+        <p>Hi! How can I help you today?</p>
+      </div>
+      <form class="chat-form" id="chatForm">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+        <textarea name="message" rows="3" placeholder="Type your message..." required></textarea>
+        <button type="submit" class="button primary">Send</button>
+      </form>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
