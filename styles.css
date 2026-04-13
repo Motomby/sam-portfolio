@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --bg: #070707;
   --surface: rgba(255, 255, 255, 0.08);
   --surface-strong: rgba(255, 255, 255, 0.14);
@@ -57,24 +57,27 @@
   animation: slideInLeft 0.8s ease forwards;
 }
 
-.hero-card.animate-on-scroll {
-  animation: slideInRight 0.8s ease forwards;
-}
-
-.about-card.animate-on-scroll {
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-.feature-card.animate-on-scroll {
-  animation: fadeInUp 0.8s ease forwards;
-}
-
+.hero-card.animate-on-scroll,
+.about-card.animate-on-scroll,
+.feature-card.animate-on-scroll,
 .contact-grid.animate-on-scroll {
   animation: fadeInUp 0.8s ease forwards;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 html {
@@ -98,15 +101,32 @@ body {
   justify-content: space-between;
   gap: 1rem;
   padding: 1.3rem 2rem;
-  backdrop-filter: blur(18px);
-  background: rgba(5, 10, 20, 0.72);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  background: rgba(15, 40, 80, 0.95);
+  border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 64px;
+  height: 64px;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(0, 123, 255, 0.8));
 }
 
 .brand span {
-  display: block;
-  font-size: 1.15rem;
-  font-weight: 700;
+  display: none;
 }
 
 .brand p {
@@ -312,7 +332,9 @@ body {
   font-size: clamp(2rem, 2.7vw, 3rem);
 }
 
-.about-grid {
+.about-grid,
+.projects-grid,
+.features-section {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
@@ -320,6 +342,7 @@ body {
 
 .about-card,
 .feature-card,
+.project-card,
 .contact-info,
 .contact-form {
   background: var(--surface);
@@ -331,15 +354,70 @@ body {
 
 .about-card h3,
 .feature-card h3,
-.contact-info h3 {
+.contact-info h3,
+.project-card h3 {
   margin-top: 0;
 }
 
 .about-card p,
 .feature-card p,
-.contact-info p {
+.contact-info p,
+.project-card p {
   color: var(--muted);
   line-height: 1.8;
+}
+
+.feature-card {
+  min-height: 220px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.contact-form label {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.contact-form input,
+.contact-form textarea,
+.chat-form input,
+.chat-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.chat-form input:focus,
+.chat-form textarea:focus {
+  border-color: rgba(0, 123, 255, 0.55);
+}
+
+.contact-form button,
+.chat-form button {
+  width: fit-content;
+}
+
+.form-status {
+  margin: 0;
+  color: #007bff;
+  min-height: 1.2rem;
 }
 
 .social-icons {
@@ -462,115 +540,10 @@ body {
   transition: border-color 0.2s ease;
 }
 
-.chat-form input:focus,
-.chat-form textarea:focus {
-  border-color: var(--accent);
-}
-
 .chat-form button {
   align-self: flex-start;
   padding: 0.7rem 1.2rem;
   font-size: 0.9rem;
-}
-
-@media (max-width: 480px) {
-  .chat-widget {
-    bottom: 15px;
-    right: 15px;
-  }
-
-  .chat-button {
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
-  }
-
-  .chat-modal {
-    bottom: 75px;
-    right: 15px;
-    width: 300px;
-  }
-}
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-  padding: 0 2rem 4rem;
-}
-
-.feature-card {
-  min-height: 220px;
-}
-
-.work-section {
-  padding: 4rem 2rem;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-}
-
-.project-card {
-  background: var(--surface);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 28px;
-  padding: 2rem;
-  backdrop-filter: blur(18px);
-}
-
-.project-card h3 {
-  margin-top: 0;
-}
-
-.project-card p {
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1.4fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-.contact-form {
-  display: grid;
-  gap: 1rem;
-}
-
-.contact-form label {
-  font-size: 0.95rem;
-  color: var(--muted);
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text);
-  outline: none;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: rgba(0, 123, 255, 0.55);
-  transform: translateY(-1px);
-}
-
-.contact-form button {
-  width: fit-content;
-}
-
-.form-status {
-  margin: 0;
-  color: #007bff;
-  min-height: 1.2rem;
 }
 
 .site-footer {
@@ -688,5 +661,22 @@ body {
   .button {
     padding: 0.85rem 1.5rem;
     font-size: 0.9rem;
+  }
+
+  .chat-widget {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .chat-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .chat-modal {
+    bottom: 75px;
+    right: 15px;
+    width: 300px;
   }
 }

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Sammy Dev logo</title>
+  <desc id="logoDesc">Logo with overlapping S and D letters and Sammy Dev text.</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#080808"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="120" fill="url(#bgGrad)"/>
+  <path d="M52 22c0 12 8 20 20 20s20-8 20-20c0-14-12-22-26-22H46v72h16V22h-10Z" fill="#fff"/>
+  <path d="M146 24a36 36 0 0 1 0 72h-44V24h44Zm-28 56h28a20 20 0 0 0 0-40h-28v40Zm28-56h-28v40h28a20 20 0 0 0 0-40Z" fill="#fff"/>
+  <text x="50%" y="105" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" fill="#fff" letter-spacing="0.16em">SAMMY DEV</text>
+</svg>
