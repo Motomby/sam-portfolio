@@ -3,7 +3,7 @@
 // Change this to your deployed backend URL when you push to production
 // e.g. 'https://sammy-portfolio-backend.up.railway.app'
 // ─────────────────────────────────────────────────────────────────────────────
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://sam-portfolio-production-451d.up.railway.app';
 
 // ─── Mobile Navigation ────────────────────────────────────────────────────────
 const menuToggle = document.querySelector('.menu-toggle');
