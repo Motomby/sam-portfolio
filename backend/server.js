@@ -50,6 +50,7 @@ app.get('/health', (_req, res) => {
     status: 'OK',
     timestamp: new Date().toISOString(),
     db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    db_error: global.dbError || null, // EXPOSE THE MONGODB ERROR CLEARLY
   });
 });
 
@@ -72,34 +73,38 @@ app.use((err, _req, res, _next) => {
 });
 
 // ─── MongoDB Connection ───────────────────────────────────────────────────────
+global.dbError = null;
+
 const connectDB = async () => {
   const uri = process.env.MONGODB_URI;
   if (!uri) {
-    console.error('❌  MONGODB_URI is not set in .env — exiting.');
-    process.exit(1);
+    global.dbError = 'MONGODB_URI is extremely missing in Railway variables!';
+    console.error('❌ ', global.dbError);
+    return; // DONT CRASH, allow the 404 endpoint to say "hi"
   }
 
   try {
     await mongoose.connect(uri, {
-      dbName: 'portfolio', // explicitly set the database name
+      dbName: 'portfolio',
     });
     console.log(`✅  MongoDB connected → ${mongoose.connection.host}`);
+    global.dbError = null;
   } catch (err) {
-    console.error('❌  MongoDB connection failed:', err.message);
-    process.exit(1);
+    global.dbError = `MongoDB connection error: ${err.message}`;
+    console.error('❌ ', global.dbError);
   }
 };
 
 // ─── Start Server ─────────────────────────────────────────────────────────────
-const startServer = async () => {
-  await connectDB();
-
+const startServer = () => {
+  // START IMMEDIATELY so Railway sees the app! Don't wait for DB timeout!
   app.listen(PORT, () => {
-    console.log(`\n🚀  Server running on http://localhost:${PORT}`);
-    console.log(`🔍  Health check: http://localhost:${PORT}/health`);
-    console.log(`📬  Contact API:  http://localhost:${PORT}/api/contact`);
-    console.log(`\n  Press Ctrl+C to stop.\n`);
+    console.log(`\n🚀  Server running on port ${PORT}`);
+    console.log(`🔍  Health check: /health`);
+    console.log(`📬  Contact API:  /api/contact`);
   });
+
+  connectDB();
 };
 
 // Handle clean shutdown (Ctrl+C or process kill)
