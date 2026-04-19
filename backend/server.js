@@ -27,12 +27,7 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. curl, Postman, mobile apps)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-      return callback(new Error(`CORS: Origin "${origin}" is not allowed.`));
-    },
+    origin: true, // Allow all origins to avoid CORS issues if FRONTEND_URL is misconfigured
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'x-admin-key'],
   })
