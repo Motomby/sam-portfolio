@@ -201,25 +201,86 @@ I bridge the gap between sleek, responsive frontends and robust, scalable backen
     <p>© 2026 Sammy Dev taking tech to the next level.</p>
   </footer>
 
-  <!-- Chat Widget -->
+  <!-- Enhanced Chat Widget -->
   <div class="chat-widget">
     <button class="chat-button" id="chatButton" aria-label="Open chat">
-      <i class="fas fa-comments"></i>
+      <i class="fas fa-comment-dots"></i>
+      <span class="chat-badge">Chat</span>
     </button>
+    
     <div class="chat-modal" id="chatModal">
       <div class="chat-header">
-        <h3>Chat with Sammy</h3>
-        <button class="close-chat" id="closeChat">&times;</button>
+        <div class="chat-header-info">
+          <div class="chat-avatar">
+            <img src="assets/profile.jpg" alt="Sammy" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=&quot;fas fa-user&quot;></i>';" />
+          </div>
+          <div class="chat-header-text">
+            <h3>Samuel Motomby</h3>
+            <span class="chat-status">🟢 Online</span>
+          </div>
+        </div>
+        <button class="close-chat" id="closeChat">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
-      <div class="chat-body">
-        <p>Hi! How can I help you today?</p>
+      
+      <div class="chat-body" id="chatBody">
+        <div class="chat-message bot-message">
+          <div class="message-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="message-content">
+            <p>👋 Hi there! I'm Samuel, a Full-Stack Developer.</p>
+            <p>How can I help you today? Feel free to ask about:</p>
+            <ul>
+              <li>🚀 Project collaborations</li>
+              <li>💼 Job opportunities</li>
+              <li>🔧 Technical consultations</li>
+              <li>📱 Web & mobile development</li>
+            </ul>
+          </div>
+        </div>
       </div>
+      
+      <div class="chat-typing-indicator" id="typingIndicator" style="display: none;">
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span>Sammy is typing...</span>
+      </div>
+      
       <form class="chat-form" id="chatForm">
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Your email" required />
-        <textarea name="message" rows="3" placeholder="Type your message..." required></textarea>
-        <button type="submit" class="button primary">Send</button>
+        <div class="chat-input-group">
+          <input type="text" name="name" id="chatName" placeholder="Your name *" required />
+          <input type="email" name="email" id="chatEmail" placeholder="Your email *" required />
+        </div>
+        <div class="chat-message-input">
+          <textarea name="message" id="chatMessage" placeholder="Type your message here..." required rows="2"></textarea>
+          <button type="submit" class="send-button" id="sendButton">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <div class="chat-options">
+          <label class="chat-option">
+            <input type="checkbox" id="saveInfo" checked>
+            <span>Save my info for future chats</span>
+          </label>
+        </div>
       </form>
+      
+      <div class="chat-footer">
+        <p>🔒 Your information is secure and private</p>
+        <div class="quick-actions">
+          <button class="quick-action" data-message="I'd like to discuss a project">
+            💬 Discuss Project
+          </button>
+          <button class="quick-action" data-message="I'm interested in hiring you">
+            💼 Hire Me
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

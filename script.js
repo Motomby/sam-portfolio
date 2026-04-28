@@ -219,16 +219,87 @@ contactForm?.addEventListener('submit', async (event) => {
   }
 });
 
-// ─── Chat Widget ──────────────────────────────────────────────────────────────
+// ─── Enhanced Chat Widget ─────────────────────────────────────────────────────
 const chatButton = document.getElementById('chatButton');
 const chatModal = document.getElementById('chatModal');
 const closeChat = document.getElementById('closeChat');
 const chatForm = document.getElementById('chatForm');
-const chatBody = document.querySelector('.chat-body');
-const chatSubmitBtn = chatForm?.querySelector('button[type="submit"]');
+const chatBody = document.getElementById('chatBody');
+const chatName = document.getElementById('chatName');
+const chatEmail = document.getElementById('chatEmail');
+const chatMessage = document.getElementById('chatMessage');
+const sendButton = document.getElementById('sendButton');
+const typingIndicator = document.getElementById('typingIndicator');
+const saveInfoCheckbox = document.getElementById('saveInfo');
 
+// Load saved user info
+function loadSavedUserInfo() {
+  const savedName = localStorage.getItem('chatName');
+  const savedEmail = localStorage.getItem('chatEmail');
+  
+  if (savedName && savedEmail) {
+    chatName.value = savedName;
+    chatEmail.value = savedEmail;
+    saveInfoCheckbox.checked = true;
+  }
+}
+
+// Save user info
+function saveUserInfo() {
+  if (saveInfoCheckbox.checked) {
+    localStorage.setItem('chatName', chatName.value);
+    localStorage.setItem('chatEmail', chatEmail.value);
+  } else {
+    localStorage.removeItem('chatName');
+    localStorage.removeItem('chatEmail');
+  }
+}
+
+// Add message to chat body
+function addMessage(content, isUser = false) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
+  
+  const avatar = document.createElement('div');
+  avatar.className = 'message-avatar';
+  avatar.innerHTML = isUser ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
+  
+  const messageContent = document.createElement('div');
+  messageContent.className = 'message-content';
+  messageContent.innerHTML = `<p>${content}</p>`;
+  
+  messageDiv.appendChild(avatar);
+  messageDiv.appendChild(messageContent);
+  
+  chatBody.appendChild(messageDiv);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Show typing indicator
+function showTypingIndicator() {
+  typingIndicator.style.display = 'flex';
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Hide typing indicator
+function hideTypingIndicator() {
+  typingIndicator.style.display = 'none';
+}
+
+// Quick action buttons
+const quickActions = document.querySelectorAll('.quick-action');
+quickActions.forEach(button => {
+  button.addEventListener('click', () => {
+    const message = button.dataset.message;
+    chatMessage.value = message;
+    chatMessage.focus();
+  });
+});
+
+// Chat controls
 chatButton?.addEventListener('click', () => {
-  chatModal.classList.toggle('show');
+  chatModal.classList.add('show');
+  loadSavedUserInfo();
 });
 
 closeChat?.addEventListener('click', () => {
@@ -245,55 +316,89 @@ window.addEventListener('click', (event) => {
   }
 });
 
+// Auto-resize textarea
+chatMessage?.addEventListener('input', () => {
+  chatMessage.style.height = 'auto';
+  chatMessage.style.height = Math.min(chatMessage.scrollHeight, 120) + 'px';
+});
+
+// Form submission
 chatForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  const formData = new FormData(chatForm);
-  const payload = {
-    name: formData.get('name'),
-    email: formData.get('email'),
-    message: formData.get('message'),
-    source: 'chat'
-  };
+  const name = chatName.value.trim();
+  const email = chatEmail.value.trim();
+  const message = chatMessage.value.trim();
 
-  // Loading state
-  chatSubmitBtn.disabled = true;
-  chatSubmitBtn.textContent = 'Sending…';
+  if (!name || !email || !message) {
+    addMessage('Please fill in all required fields.', false);
+    return;
+  }
+
+  // Add user message to chat
+  addMessage(message, true);
+
+  // Save user info if checkbox is checked
+  saveUserInfo();
+
+  // Clear form
+  chatMessage.value = '';
+  chatMessage.style.height = 'auto';
+
+  // Disable send button
+  sendButton.disabled = true;
+  sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+  // Show typing indicator
+  showTypingIndicator();
 
   try {
+    const payload = {
+      name,
+      email,
+      message,
+      source: 'chat',
+    };
+
     await submitMessage(payload);
 
-    // Show success message in chat body
-    chatBody.innerHTML = `
-      <div style="text-align:center; padding: 16px 0;">
-        <p style="font-size: 1.4rem; margin-bottom: 8px;">✅</p>
-        <p style="font-weight: 600;">Message sent!</p>
-        <p style="font-size: 0.875rem; opacity: 0.8;">Thanks, ${payload.name}! I'll reply to ${payload.email} soon.</p>
-      </div>
-    `;
-    chatForm.style.display = 'none';
-    chatForm.reset();
+    // Hide typing indicator
+    hideTypingIndicator();
 
-    // Auto-close after 3 seconds
+    // Add success message
+    addMessage(`Thank you for your message, ${name}! I've received it and will get back to you at ${email} as soon as possible. 🚀`, false);
+
+    // Reset form after successful send
     setTimeout(() => {
-      chatModal.classList.remove('show');
-      // Reset chat UI for next open
-      setTimeout(() => {
-        chatBody.innerHTML = '<p>Hi! How can I help you today?</p>';
-        chatForm.style.display = '';
-      }, 400);
-    }, 3000);
+      if (saveInfoCheckbox.checked) {
+        chatMessage.value = '';
+      } else {
+        chatForm.reset();
+      }
+    }, 1000);
+
   } catch (err) {
-    // Show inline error in chat body
-    const errEl = document.createElement('p');
-    errEl.style.cssText = 'color:#f87171; font-size:0.875rem; margin-top:8px;';
-    errEl.textContent = err.message;
-    chatBody.appendChild(errEl);
-    setTimeout(() => errEl.remove(), 4000);
+    hideTypingIndicator();
+    addMessage(`Sorry, there was an error sending your message: ${err.message}. Please try again.`, false);
   } finally {
-    chatSubmitBtn.disabled = false;
-    chatSubmitBtn.textContent = 'Send';
+    sendButton.disabled = false;
+    sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
   }
+});
+
+// Character counter for message
+chatMessage?.addEventListener('input', () => {
+  const maxLength = 500;
+  const currentLength = chatMessage.value.length;
+  
+  if (currentLength > maxLength) {
+    chatMessage.value = chatMessage.value.substring(0, maxLength);
+  }
+});
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadSavedUserInfo();
 });
 
 // ─── Scroll Animations ────────────────────────────────────────────────────────
