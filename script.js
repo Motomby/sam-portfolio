@@ -1,9 +1,78 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Configuration
-// Change this to your deployed backend URL when you push to production
-// e.g. 'https://sammy-portfolio-backend.up.railway.app'
+// EmailJS Configuration
+// Replace these with your actual EmailJS credentials
+// Get them from: https://www.emailjs.com/
 // ─────────────────────────────────────────────────────────────────────────────
-const API_BASE_URL = 'https://sam-portfolio-production-451d.up.railway.app';
+const EMAILJS_SERVICE_ID = 'nqrvit7';
+const EMAILJS_TEMPLATE_ID = 'l58gsos'; // Replace with your actual template ID
+const EMAILJS_PUBLIC_KEY = 'V4I3KV8WBs8ylAT_U'; // Replace with your actual public key
+
+// Backend API URL for database storage
+const API_BASE_URL = 'http://localhost:5000'; // Change this in production
+
+// Initialize EmailJS
+(function() {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+})();
+
+// ─── Visitor Tracking ────────────────────────────────────────────────────────────
+/**
+ * Generates a unique session ID for tracking visitor sessions
+ */
+function generateSessionId() {
+  return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+/**
+ * Tracks page visits and sends data to backend
+ */
+async function trackVisit() {
+  try {
+    const sessionId = sessionStorage.getItem('visitorSessionId') || generateSessionId();
+    sessionStorage.setItem('visitorSessionId', sessionId);
+
+    const visitData = {
+      page: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      sessionId: sessionId,
+      userAgent: navigator.userAgent,
+    };
+
+    // Send tracking data to backend (fire-and-forget, don't await)
+    fetch(`${API_BASE_URL}/api/visitors/track`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(visitData),
+    }).catch(error => {
+      // Silently fail tracking - don't break the user experience
+      console.warn('Visitor tracking failed:', error);
+    });
+  } catch (error) {
+    console.warn('Visitor tracking error:', error);
+  }
+}
+
+// Track initial page load
+trackVisit();
+
+// Track page navigation (for single-page apps)
+let currentPath = window.location.pathname;
+const navigationObserver = new MutationObserver(() => {
+  if (window.location.pathname !== currentPath) {
+    currentPath = window.location.pathname;
+    setTimeout(trackVisit, 100); // Small delay to ensure URL is updated
+  }
+});
+
+// Observe URL changes for navigation tracking
+navigationObserver.observe(document, { subtree: true, childList: true });
+
+// Also track when user becomes visible again (returns to tab)
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    trackVisit();
+  }
+});
 
 // ─── Mobile Navigation ────────────────────────────────────────────────────────
 const menuToggle = document.querySelector('.menu-toggle');
@@ -22,24 +91,86 @@ window.addEventListener('click', (event) => {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /**
- * Submits a message to the backend API.
+ * Sends a message using both EmailJS and backend API.
+ * EmailJS: Sends email notification immediately
+ * Backend: Saves message to MongoDB database
  * @param {{ name: string, email: string, message: string, source: string }} payload
  * @returns {Promise<{ success: boolean, message: string }>}
  */
 async function submitMessage(payload) {
-  const res = await fetch(`${API_BASE_URL}/api/contact`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    // Surface the first validation error or the general message
-    const errMsg =
-      data.errors?.[0]?.message || data.message || 'Something went wrong.';
-    throw new Error(errMsg);
+  const results = [];
+  
+  try {
+    // 1. Send email via EmailJS (fire-and-forget)
+    try {
+      const emailResponse = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: payload.name,
+          from_email: payload.email,
+          message: payload.message,
+          to_name: 'Samuel Motomby',
+          reply_to: payload.email
+        }
+      );
+      
+      if (emailResponse.status === 200) {
+        results.push({ type: 'email', success: true });
+      }
+    } catch (emailError) {
+      console.warn('EmailJS failed:', emailError);
+      results.push({ type: 'email', success: false, error: emailError.message });
+    }
+    
+    // 2. Save to database via backend API
+    try {
+      const dbResponse = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      
+      const dbData = await dbResponse.json();
+      
+      if (dbResponse.ok) {
+        results.push({ type: 'database', success: true });
+      } else {
+        throw new Error(dbData.message || 'Database save failed');
+      }
+    } catch (dbError) {
+      console.warn('Database save failed:', dbError);
+      results.push({ type: 'database', success: false, error: dbError.message });
+    }
+    
+    // 3. Determine overall success
+    const emailSuccess = results.find(r => r.type === 'email')?.success || false;
+    const dbSuccess = results.find(r => r.type === 'database')?.success || false;
+    
+    if (emailSuccess && dbSuccess) {
+      return {
+        success: true,
+        message: "Message sent successfully! I'll get back to you soon."
+      };
+    } else if (emailSuccess) {
+      return {
+        success: true,
+        message: "Email sent successfully! Message saved to database failed, but I'll still receive your message."
+      };
+    } else if (dbSuccess) {
+      return {
+        success: true,
+        message: "Message saved successfully! Email notification failed, but I'll still see your message."
+      };
+    } else {
+      const errors = results.map(r => r.error).filter(Boolean);
+      throw new Error(`Failed to send message: ${errors.join(', ')}`);
+    }
+    
+  } catch (error) {
+    console.error('Submit message error:', error);
+    throw new Error('Failed to send message. Please try again later.');
   }
-  return data;
 }
 
 /**
@@ -68,7 +199,7 @@ contactForm?.addEventListener('submit', async (event) => {
     name: formData.get('name'),
     email: formData.get('email'),
     message: formData.get('message'),
-    source: 'contact',
+    source: 'contact'
   };
 
   // Loading state
@@ -122,7 +253,7 @@ chatForm?.addEventListener('submit', async (event) => {
     name: formData.get('name'),
     email: formData.get('email'),
     message: formData.get('message'),
-    source: 'chat',
+    source: 'chat'
   };
 
   // Loading state
@@ -181,4 +312,23 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.animate-on-scroll').forEach((el) => {
   observer.observe(el);
+});
+
+// ─── Simple Project Card Interactions ───────────────────────────────────────────
+const projectLinks = document.querySelectorAll('.project-link');
+
+projectLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Add a simple click effect
+    const card = link.closest('.project-card');
+    card.style.transform = 'scale(0.95)';
+    
+    setTimeout(() => {
+      card.style.transform = '';
+      // In a real implementation, you would navigate to the project
+      console.log('Navigate to project:', card.querySelector('h3').textContent);
+    }, 150);
+  });
 });

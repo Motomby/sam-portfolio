@@ -7,6 +7,7 @@ const helmet = require('helmet');
 
 // ─── Route Imports ────────────────────────────────────────────────────────────
 const contactRoutes = require('./routes/contact');
+const visitorRoutes = require('./routes/visitors');
 
 // ─── App Setup ────────────────────────────────────────────────────────────────
 const app = express();
@@ -55,6 +56,7 @@ app.get('/health', (_req, res) => {
 });
 
 app.use('/api/contact', contactRoutes);
+app.use('/api/visitors', visitorRoutes);
 
 // ─── 404 Handler ─────────────────────────────────────────────────────────────
 app.use((_req, res) => {

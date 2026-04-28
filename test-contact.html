@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Test</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .status { margin-top: 10px; padding: 10px; border-radius: 4px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+    <h1>Contact Form Test</h1>
+    <p>This test page uses both EmailJS and your backend API.</p>
+    
+    <form id="testForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" id="submitBtn">Send Test Message</button>
+        <div id="status" class="status"></div>
+    </form>
+
+    <script>
+        // Configuration (update these with your actual EmailJS credentials)
+        const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+        const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+        const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+        const API_BASE_URL = 'http://localhost:5000';
+
+        // Initialize EmailJS
+        (function() {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        })();
+
+        // Form handling
+        const form = document.getElementById('testForm');
+        const status = document.getElementById('status');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const payload = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message'),
+                source: 'test'
+            };
+
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            status.className = 'status';
+            status.textContent = '';
+
+            try {
+                const result = await submitMessage(payload);
+                status.className = 'status success';
+                status.textContent = result.message;
+                form.reset();
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = error.message;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Test Message';
+            }
+        });
+
+        async function submitMessage(payload) {
+            const results = [];
+            
+            try {
+                // 1. Send email via EmailJS
+                try {
+                    const emailResponse = await emailjs.send(
+                        EMAILJS_SERVICE_ID,
+                        EMAILJS_TEMPLATE_ID,
+                        {
+                            from_name: payload.name,
+                            from_email: payload.email,
+                            message: payload.message,
+                            to_name: 'Samuel Motomby',
+                            reply_to: payload.email
+                        }
+                    );
+                    
+                    if (emailResponse.status === 200) {
+                        results.push({ type: 'email', success: true });
+                    }
+                } catch (emailError) {
+                    console.warn('EmailJS failed:', emailError);
+                    results.push({ type: 'email', success: false, error: emailError.message });
+                }
+                
+                // 2. Save to database via backend API
+                try {
+                    const dbResponse = await fetch(`${API_BASE_URL}/api/contact`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                    });
+                    
+                    const dbData = await dbResponse.json();
+                    
+                    if (dbResponse.ok) {
+                        results.push({ type: 'database', success: true });
+                    } else {
+                        throw new Error(dbData.message || 'Database save failed');
+                    }
+                } catch (dbError) {
+                    console.warn('Database save failed:', dbError);
+                    results.push({ type: 'database', success: false, error: dbError.message });
+                }
+                
+                // 3. Determine overall success
+                const emailSuccess = results.find(r => r.type === 'email')?.success || false;
+                const dbSuccess = results.find(r => r.type === 'database')?.success || false;
+                
+                if (emailSuccess && dbSuccess) {
+                    return {
+                        success: true,
+                        message: "✅ Both email and database save successful!"
+                    };
+                } else if (emailSuccess) {
+                    return {
+                        success: true,
+                        message: "✅ Email sent, but database save failed"
+                    };
+                } else if (dbSuccess) {
+                    return {
+                        success: true,
+                        message: "✅ Database save successful, but email failed"
+                    };
+                } else {
+                    const errors = results.map(r => r.error).filter(Boolean);
+                    throw new Error(`Both failed: ${errors.join(', ')}`);
+                }
+                
+            } catch (error) {
+                console.error('Submit message error:', error);
+                throw new Error('Failed to send message. Please try again later.');
+            }
+        }
+    </script>
+</body>
+</html>
