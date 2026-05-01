@@ -10,7 +10,7 @@ const EMAILJS_PUBLIC_KEY = 'V4I3KV8WBs8ylAT_U'; // Replace with your actual publ
 // Backend API URL — points to Railway in production, localhost in dev
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000'
-  : 'https://samuel-ekema-backend-production.up.railway.app'; // ← your Railway URL
+  : 'https://sam-portfolio-production-cdbd.up.railway.app';
 
 // Initialize EmailJS
 (function() {
