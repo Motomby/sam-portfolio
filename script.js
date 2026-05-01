@@ -7,8 +7,10 @@ const EMAILJS_SERVICE_ID = 'nqrvit7';
 const EMAILJS_TEMPLATE_ID = 'l58gsos'; // Replace with your actual template ID
 const EMAILJS_PUBLIC_KEY = 'V4I3KV8WBs8ylAT_U'; // Replace with your actual public key
 
-// Backend API URL for database storage
-const API_BASE_URL = 'http://localhost:5000'; // Change this in production
+// Backend API URL — points to Railway in production, localhost in dev
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:5000'
+  : 'https://samuel-ekema-backend-production.up.railway.app'; // ← your Railway URL
 
 // Initialize EmailJS
 (function() {
@@ -182,7 +184,8 @@ async function submitMessage(payload) {
     
   } catch (error) {
     console.error('Submit message error:', error);
-    throw new Error('Failed to send message. Please try again later.');
+    // Re-throw the original error so the UI shows the real reason
+    throw error;
   }
 }
 
