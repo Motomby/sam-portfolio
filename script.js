@@ -15,6 +15,14 @@ const API_BASE_URL = 'http://localhost:5000'; // Change this in production
   emailjs.init(EMAILJS_PUBLIC_KEY);
 })();
 
+// Test EmailJS configuration
+function testEmailJS() {
+  console.log('Testing EmailJS configuration...');
+  console.log('Service ID:', EMAILJS_SERVICE_ID);
+  console.log('Template ID:', EMAILJS_TEMPLATE_ID);
+  console.log('Public Key:', EMAILJS_PUBLIC_KEY);
+}
+
 // ─── Visitor Tracking ────────────────────────────────────────────────────────────
 /**
  * Generates a unique session ID for tracking visitor sessions
@@ -107,17 +115,16 @@ async function submitMessage(payload) {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          from_name: payload.name,
-          from_email: payload.email,
+          name: payload.name,
+          email: payload.email,
           message: payload.message,
-          to_name: 'Samuel Motomby',
+          from_name: payload.name,
           reply_to: payload.email
         }
       );
       
-      if (emailResponse.status === 200) {
-        results.push({ type: 'email', success: true });
-      }
+      console.log('EmailJS response:', emailResponse);
+      results.push({ type: 'email', success: true });
     } catch (emailError) {
       console.warn('EmailJS failed:', emailError);
       results.push({ type: 'email', success: false, error: emailError.message });
@@ -147,6 +154,11 @@ async function submitMessage(payload) {
     const emailSuccess = results.find(r => r.type === 'email')?.success || false;
     const dbSuccess = results.find(r => r.type === 'database')?.success || false;
     
+    // Log results for debugging
+    console.log('Submission results:', results);
+    console.log('Email success:', emailSuccess);
+    console.log('Database success:', dbSuccess);
+    
     if (emailSuccess && dbSuccess) {
       return {
         success: true,
@@ -164,7 +176,8 @@ async function submitMessage(payload) {
       };
     } else {
       const errors = results.map(r => r.error).filter(Boolean);
-      throw new Error(`Failed to send message: ${errors.join(', ')}`);
+      console.error('All errors:', errors);
+      throw new Error(`Failed to send message. Please try again later. (${errors.join(', ')})`);
     }
     
   } catch (error) {
