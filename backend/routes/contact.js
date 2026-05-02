@@ -34,19 +34,25 @@ router.post(
     try {
       const { name, email, message, source = 'contact' } = req.body;
 
-      // 1. Save to MongoDB
-      const newMessage = await Message.create({ name, email, message, source });
+      // 1. Try to save to MongoDB, but don't fail if DB is disconnected
+      let messageId = null;
+      try {
+        const newMessage = await Message.create({ name, email, message, source });
+        messageId = newMessage._id;
+      } catch (dbErr) {
+        console.warn('[Contact Route] Warning: Could not save to database. Proceeding to send email anyway.', dbErr.message);
+      }
 
       // 2. Send email notification (fire-and-forget — don't await in response)
       sendNotificationEmail({ name, email, message, source });
 
-      // 3. Respond with success
+      // 3. Respond with success regardless of DB state
       return res.status(201).json({
         success: true,
         message: "Thanks for reaching out! I'll get back to you soon.",
         data: {
-          id: newMessage._id,
-          createdAt: newMessage.createdAt,
+          id: messageId || 'no-db-id',
+          createdAt: new Date(),
         },
       });
     } catch (err) {
