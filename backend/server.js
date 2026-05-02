@@ -100,7 +100,7 @@ const connectDB = async () => {
 // ─── Start Server ─────────────────────────────────────────────────────────────
 const startServer = () => {
   // START IMMEDIATELY so Railway sees the app! Don't wait for DB timeout!
-  app.listen(PORT, () => {
+  app.listen(PORT, '0.0.0.0', () => {
     console.log(`\n🚀  Server running on port ${PORT}`);
     console.log(`🔍  Health check: /health`);
     console.log(`📬  Contact API:  /api/contact`);
