@@ -3,26 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio | Sammy</title>
+  <title>Samuel Motomby | Full-Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
   <header class="site-header">
-    <div class="brand">
-      <a href="#home" class="brand-link">
-        <img src="assets/Screenshot 2026-05-01 134015.png" alt="Sammy Dev logo" class="brand-logo" />
-        <span class="sr-only">Sammy Dev</span>
-      </a>
-    </div>
+    <!-- Brand / Logo -->
+    <a href="#home" class="brand-link" aria-label="Go to top">
+      <img src="assets/Screenshot 2026-05-01 134015.png" alt="Samuel Motomby logo" class="brand-logo" />
+      <div class="brand-text">
+        <span class="brand-name">Samuel<span class="brand-accent"> Motomby</span></span>
+        <span class="brand-tagline">Full-Stack Developer</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
     <nav class="site-nav" aria-label="Primary navigation">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
+      <a href="#home" class="nav-link" data-section="home">Home</a>
+      <a href="#about" class="nav-link" data-section="about">About</a>
+      <a href="#work" class="nav-link" data-section="work">Work</a>
+      <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+      <a href="#contact" class="nav-cta">Hire Me <i class="fas fa-arrow-right"></i></a>
     </nav>
-    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+
+    <!-- Mobile hamburger -->
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <i class="fas fa-bars" id="menuIcon"></i>
+    </button>
   </header>
 
   <main>

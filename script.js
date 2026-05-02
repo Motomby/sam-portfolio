@@ -84,19 +84,67 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// ─── Mobile Navigation ────────────────────────────────────────────────────────
+// ─── Navigation & Scroll Spy ────────────────────────────────────────────────────
 const menuToggle = document.querySelector('.menu-toggle');
+const menuIcon = document.getElementById('menuIcon');
 const siteNav = document.querySelector('.site-nav');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
 
+// Mobile Menu Toggle
 menuToggle?.addEventListener('click', () => {
-  siteNav.classList.toggle('nav-open');
-});
-
-window.addEventListener('click', (event) => {
-  if (!event.target.closest('.site-header')) {
-    siteNav.classList.remove('nav-open');
+  const isOpen = siteNav.classList.toggle('nav-open');
+  menuToggle.setAttribute('aria-expanded', isOpen);
+  
+  if (isOpen) {
+    menuIcon.classList.remove('fa-bars');
+    menuIcon.classList.add('fa-times');
+  } else {
+    menuIcon.classList.remove('fa-times');
+    menuIcon.classList.add('fa-bars');
   }
 });
+
+// Close mobile menu when clicking outside
+window.addEventListener('click', (event) => {
+  if (!event.target.closest('.site-header') && siteNav.classList.contains('nav-open')) {
+    siteNav.classList.remove('nav-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuIcon.classList.remove('fa-times');
+    menuIcon.classList.add('fa-bars');
+  }
+});
+
+// Close mobile menu when a link is clicked
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    siteNav.classList.remove('nav-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuIcon.classList.remove('fa-times');
+    menuIcon.classList.add('fa-bars');
+  });
+});
+
+// Scroll Spy - Highlight active section
+function highlightNav() {
+  const scrollY = window.scrollY;
+  
+  sections.forEach(current => {
+    const sectionHeight = current.offsetHeight;
+    const sectionTop = current.offsetTop - 100; // offset for sticky header
+    const sectionId = current.getAttribute('id');
+    
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      document.querySelector(`.site-nav a[data-section="${sectionId}"]`)?.classList.add('active');
+    } else {
+      document.querySelector(`.site-nav a[data-section="${sectionId}"]`)?.classList.remove('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', highlightNav);
+// Run once on load to set initial state
+highlightNav();
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
