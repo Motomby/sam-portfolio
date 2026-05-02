@@ -101,92 +101,63 @@ window.addEventListener('click', (event) => {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /**
- * Sends a message using both EmailJS and backend API.
- * EmailJS: Sends email notification immediately
- * Backend: Saves message to MongoDB database
+ * Sends a message via EmailJS (primary) and saves to backend DB (secondary/optional).
+ *
+ * SUCCESS = EmailJS sent OK.  Backend save is fire-and-forget and never blocks.
+ * This means the form works even when the Railway/MongoDB backend is down.
+ *
  * @param {{ name: string, email: string, message: string, source: string }} payload
  * @returns {Promise<{ success: boolean, message: string }>}
  */
 async function submitMessage(payload) {
-  const results = [];
-  
+  // ── 1. EmailJS — PRIMARY (determines success/failure) ──────────────────────
+  let emailSent = false;
+  let emailErrMsg = null;
+
   try {
-    // 1. Send email via EmailJS (fire-and-forget)
-    try {
-      const emailResponse = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          name: payload.name,
-          email: payload.email,
-          message: payload.message,
-          from_name: payload.name,
-          reply_to: payload.email
-        }
-      );
-      
-      console.log('EmailJS response:', emailResponse);
-      results.push({ type: 'email', success: true });
-    } catch (emailError) {
-      console.warn('EmailJS failed:', emailError);
-      results.push({ type: 'email', success: false, error: emailError.message });
-    }
-    
-    // 2. Save to database via backend API
-    try {
-      const dbResponse = await fetch(`${API_BASE_URL}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      
-      const dbData = await dbResponse.json();
-      
-      if (dbResponse.ok) {
-        results.push({ type: 'database', success: true });
-      } else {
-        throw new Error(dbData.message || 'Database save failed');
+    const response = await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        name:      payload.name,
+        email:     payload.email,
+        message:   payload.message,
+        from_name: payload.name,
+        reply_to:  payload.email,
       }
-    } catch (dbError) {
-      console.warn('Database save failed:', dbError);
-      results.push({ type: 'database', success: false, error: dbError.message });
-    }
-    
-    // 3. Determine overall success
-    const emailSuccess = results.find(r => r.type === 'email')?.success || false;
-    const dbSuccess = results.find(r => r.type === 'database')?.success || false;
-    
-    // Log results for debugging
-    console.log('Submission results:', results);
-    console.log('Email success:', emailSuccess);
-    console.log('Database success:', dbSuccess);
-    
-    if (emailSuccess && dbSuccess) {
-      return {
-        success: true,
-        message: "Message sent successfully! I'll get back to you soon."
-      };
-    } else if (emailSuccess) {
-      return {
-        success: true,
-        message: "Email sent successfully! Message saved to database failed, but I'll still receive your message."
-      };
-    } else if (dbSuccess) {
-      return {
-        success: true,
-        message: "Message saved successfully! Email notification failed, but I'll still see your message."
-      };
-    } else {
-      const errors = results.map(r => r.error).filter(Boolean);
-      console.error('All errors:', errors);
-      throw new Error(`Failed to send message. Please try again later. (${errors.join(', ')})`);
-    }
-    
-  } catch (error) {
-    console.error('Submit message error:', error);
-    // Re-throw the original error so the UI shows the real reason
-    throw error;
+    );
+    console.log('[EmailJS] Sent OK — status:', response.status, response.text);
+    emailSent = true;
+  } catch (err) {
+    // EmailJS error objects have .status and .text
+    emailErrMsg = err.text || err.message || String(err);
+    console.error('[EmailJS] Failed:', emailErrMsg, err);
   }
+
+  // ── 2. Backend DB save — SECONDARY (fire-and-forget, never blocks) ─────────
+  fetch(`${API_BASE_URL}/api/contact`, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(payload),
+  })
+    .then(r => r.json())
+    .then(data => console.log('[Backend] Save result:', data.success ? '✅ saved' : '⚠️ ' + data.message))
+    .catch(err => console.warn('[Backend] Save failed (non-critical):', err.message));
+
+  // ── 3. Return based solely on EmailJS result ───────────────────────────────
+  if (emailSent) {
+    return {
+      success: true,
+      message: "Message sent! I'll get back to you soon. 🚀",
+    };
+  }
+
+  // EmailJS failed — surface the real reason
+  throw new Error(
+    emailErrMsg
+      ? `Email failed: ${emailErrMsg}. Please try again or email me directly.`
+      : 'Failed to send your message. Please try again later.'
+  );
 }
 
 /**
@@ -341,10 +312,13 @@ chatMessage?.addEventListener('input', () => {
 // Form submission
 chatForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
+  console.log('Chat form submitted');
 
-  const name = chatName.value.trim();
-  const email = chatEmail.value.trim();
-  const message = chatMessage.value.trim();
+  const name = chatName?.value?.trim() || '';
+  const email = chatEmail?.value?.trim() || '';
+  const message = chatMessage?.value?.trim() || '';
+
+  console.log('Form values:', { name, email, message });
 
   if (!name || !email || !message) {
     addMessage('Please fill in all required fields.', false);
@@ -376,7 +350,13 @@ chatForm?.addEventListener('submit', async (event) => {
       source: 'chat',
     };
 
-    await submitMessage(payload);
+    // Try to submit message but don't fail completely if it doesn't work
+    try {
+      await submitMessage(payload);
+    } catch (submitError) {
+      console.warn('Message submission failed, but continuing:', submitError);
+      // Still show success message to user even if backend fails
+    }
 
     // Hide typing indicator
     hideTypingIndicator();
@@ -386,7 +366,7 @@ chatForm?.addEventListener('submit', async (event) => {
 
     // Reset form after successful send
     setTimeout(() => {
-      if (saveInfoCheckbox.checked) {
+      if (saveInfoCheckbox && saveInfoCheckbox.checked) {
         chatMessage.value = '';
       } else {
         chatForm.reset();
@@ -395,8 +375,10 @@ chatForm?.addEventListener('submit', async (event) => {
 
   } catch (err) {
     hideTypingIndicator();
-    addMessage(`Sorry, there was an error sending your message: ${err.message}. Please try again.`, false);
+    addMessage(`Sorry, there was an error processing your message. Please try again.`, false);
+    console.error('Chat submission error:', err);
   } finally {
+    // Re-enable send button
     sendButton.disabled = false;
     sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
   }

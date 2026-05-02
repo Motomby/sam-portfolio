@@ -358,21 +358,44 @@
       </div>
       
       <form class="chat-form" id="chatForm">
+        <!-- Name & Email fields required by the submit handler -->
+        <div class="chat-input-group">
+          <input
+            type="text"
+            id="chatName"
+            name="name"
+            placeholder="Your name"
+            required
+          />
+          <input
+            type="email"
+            id="chatEmail"
+            name="email"
+            placeholder="Your email"
+            required
+          />
+        </div>
         <div class="chat-message-input">
-          <textarea name="message" id="chatMessage" placeholder="Type your message here..." required rows="3"></textarea>
+          <textarea name="message" id="chatMessage" placeholder="Type your message here..." required rows="2"></textarea>
           <button type="submit" class="send-button" id="sendButton">
             <i class="fas fa-paper-plane"></i>
           </button>
         </div>
+        <div class="chat-form-footer">
+          <label class="chat-option">
+            <input type="checkbox" id="saveInfo" />
+            <span>Remember me</span>
+          </label>
+        </div>
         <div class="quick-actions">
-          <button class="quick-action" data-message="Hi! I'd like to discuss a project">
-            💬 Discuss Project
+          <button type="button" class="quick-action" data-message="Hi! I'd like to discuss a project">
+            💬 Project
           </button>
-          <button class="quick-action" data-message="I have a question about your services">
-            ❓ Ask Question
+          <button type="button" class="quick-action" data-message="I have a question about your services">
+            ❓ Question
           </button>
-          <button class="quick-action" data-message="I'd like to collaborate with you">
-            🤝 Collaborate
+          <button type="button" class="quick-action" data-message="I'd like to collaborate with you">
+            🤝 Collab
           </button>
         </div>
       </form>
