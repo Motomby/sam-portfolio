@@ -1793,128 +1793,6 @@ body {
   animation-play-state: paused;
 }
 
-/* GitHub – top-right */
-.tech-badge--github {
-  top: -8px;
-  right: -8px;
-  background: #24292e;
-  color: #ffffff;
-  animation: floatBadge 4s ease-in-out infinite;
-}
-
-/* VS Code – bottom-right */
-.tech-badge--vscode {
-  bottom: -4px;
-  right: -14px;
-  background: #007acc;
-  color: #ffffff;
-  animation: floatBadge 4.5s ease-in-out infinite 0.8s;
-}
-
-/* Railway – top-left */
-.tech-badge--railway {
-  top: -4px;
-  left: -14px;
-  background: #0b0d0e;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.15);
-  animation: floatBadge 3.8s ease-in-out infinite 0.4s;
-}
-
-/* Vercel – bottom-left */
-.tech-badge--vercel {
-  bottom: -8px;
-  left: -8px;
-  background: #000000;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.15);
-  animation: floatBadge 4.2s ease-in-out infinite 1.2s;
-}
-
-/* PostgreSQL – top-right */
-.tech-badge--postgres {
-  top: -10px;
-  right: -10px;
-  background: #336791;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.2);
-  animation: floatBadge 3.8s ease-in-out infinite 0.3s;
-}
-
-/* MongoDB – right side */
-.tech-badge--mongodb {
-  top: 50%;
-  right: -15px;
-  background: #47a248;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.2);
-  animation: floatBadge 4.1s ease-in-out infinite 0.8s;
-}
-
-/* YouTube – bottom-right */
-.tech-badge--youtube {
-  bottom: -10px;
-  right: -10px;
-  background: #ff0000;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.3);
-  animation: floatBadge 3.6s ease-in-out infinite 1.5s;
-}
-
-/* Chrome – top-right */
-.tech-badge--chrome {
-  top: -10px;
-  right: 50%;
-  background: #4285f4;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.2);
-  animation: floatBadge 3.9s ease-in-out infinite 0.6s;
-}
-
-/* Antigravity – floating above */
-.tech-badge--antigravity {
-  top: -25px;
-  left: 50%;
-  background: linear-gradient(135deg, #6b46c1, #1a1a2e);
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.3);
-  animation: floatBadge 4.5s ease-in-out infinite 2.1s;
-}
-
-/* Docker – left side */
-.tech-badge--docker {
-  top: 30%;
-  left: -15px;
-  background: #2496ed;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.2);
-  animation: floatBadge 3.7s ease-in-out infinite 1.0s;
-}
-
-/* Python – floating */
-.tech-badge--python {
-  bottom: 20px;
-  left: -12px;
-  background: linear-gradient(135deg, #3776ab, #ffd43b);
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.2);
-  animation: floatBadge 4.3s ease-in-out infinite 0.4s;
-}
-
-/* Django – bottom */
-.tech-badge--django {
-  bottom: -15px;
-  left: 50%;
-  background: #092e20;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.2);
-  animation: floatBadge 4.0s ease-in-out infinite 1.8s;
-}
-
-@keyframes floatBadge {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-6px); }
-}
 
 /* ── About summary text ── */
 .about-summary {
@@ -2080,8 +1958,8 @@ body {
   }
 
   .about-avatar-wrap {
-    width: 180px;
-    height: 180px;
+    width: 120px;
+    height: 120px;
     margin: 0 auto;
   }
 
