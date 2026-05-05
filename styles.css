@@ -667,6 +667,17 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.whatsapp-button {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: white;
+}
+
+.whatsapp-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .social-icons i {
   font-size: 1.2rem;
 }
