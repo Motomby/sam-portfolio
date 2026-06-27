@@ -159,28 +159,28 @@
           <h3><i class="fas fa-trophy"></i> Core Strengths</h3>
           <div class="strengths-list">
             <div class="strength-item">
-              <span class="strength-icon">🚀</span>
+              <span class="strength-icon"></span>
               <div>
                 <h4>Problem Solving</h4>
                 <p>Analytical thinking to break down complex challenges into manageable solutions.</p>
               </div>
             </div>
             <div class="strength-item">
-              <span class="strength-icon">🎯</span>
+              <span class="strength-icon"></span>
               <div>
                 <h4>Attention to Detail</h4>
                 <p>Meticulous approach to code quality, user experience, and project requirements.</p>
               </div>
             </div>
             <div class="strength-item">
-              <span class="strength-icon">🌱</span>
+              <span class="strength-icon"></span>
               <div>
                 <h4>Continuous Learning</h4>
                 <p>Staying current with emerging technologies and industry best practices.</p>
               </div>
             </div>
             <div class="strength-item">
-              <span class="strength-icon">🤝</span>
+              <span class="strength-icon"></span>
               <div>
                 <h4>Collaboration</h4>
                 <p>Effective communication and teamwork in cross-functional development environments.</p>
@@ -298,9 +298,6 @@
           <textarea name="message" rows="5" placeholder="Write your message" required></textarea>
           <button type="submit" class="button primary">Send Message</button>
           <p class="form-status" id="formStatus"></p>
-          <button type="button" class="button secondary" onclick="testEmailJS()" style="margin-top: 1rem;">
-            🧪 Test Email Delivery
-          </button>
         </form>
       </div>
     </section>
@@ -310,103 +307,11 @@
     <p>© 2026 Sammy Dev taking tech to the next level.</p>
   </footer>
 
-  <!-- Enhanced Chat Widget -->
+  <!-- WhatsApp Widget -->
   <div class="chat-widget">
-    <button class="chat-button" id="chatButton" aria-label="Open chat">
-      <i class="fas fa-comment-dots"></i>
-      <span class="chat-badge">Chat</span>
-    </button>
-    
-    <div class="chat-modal" id="chatModal">
-      <div class="chat-header">
-        <div class="chat-header-info">
-          <div class="chat-avatar">
-            <img src="assets/profile.jpg" alt="Sammy" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=&quot;fas fa-user&quot;></i>';" />
-          </div>
-          <div class="chat-header-text">
-            <h3>Samuel Motomby</h3>
-            <span class="chat-status">🟢 Online</span>
-          </div>
-        </div>
-        <button class="close-chat" id="closeChat">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <div class="chat-body" id="chatBody">
-        <div class="chat-message bot-message">
-          <div class="message-avatar">
-            <i class="fas fa-robot"></i>
-          </div>
-          <div class="message-content">
-            <p>👋 Hi there! I'm Samuel, a Full-Stack Developer.</p>
-            <p>How can I help you today? Feel free to ask about:</p>
-            <ul>
-              <li>🚀 Project collaborations</li>
-              <li>💼 Job opportunities</li>
-              <li>🔧 Technical consultations</li>
-              <li>📱 Web & mobile development</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      
-      <div class="chat-typing-indicator" id="typingIndicator" style="display: none;">
-        <div class="typing-dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <span>Sammy is typing...</span>
-      </div>
-      
-      <form class="chat-form" id="chatForm">
-        <!-- Name & Email fields required by the submit handler -->
-        <div class="chat-input-group">
-          <input
-            type="text"
-            id="chatName"
-            name="name"
-            placeholder="Your name"
-            required
-          />
-          <input
-            type="email"
-            id="chatEmail"
-            name="email"
-            placeholder="Your email"
-            required
-          />
-        </div>
-        <div class="chat-message-input">
-          <textarea name="message" id="chatMessage" placeholder="Type your message here..." required rows="2"></textarea>
-          <button type="submit" class="send-button" id="sendButton">
-            <i class="fas fa-paper-plane"></i>
-          </button>
-        </div>
-        <div class="chat-form-footer">
-          <label class="chat-option">
-            <input type="checkbox" id="saveInfo" />
-            <span>Remember me</span>
-          </label>
-        </div>
-        <div class="quick-actions">
-          <button type="button" class="quick-action" data-message="Hi! I'd like to discuss a project">
-            💬 Project
-          </button>
-          <button type="button" class="quick-action" data-message="I have a question about your services">
-            ❓ Question
-          </button>
-          <button type="button" class="quick-action" data-message="I'd like to collaborate with you">
-            🤝 Collab
-          </button>
-        </div>
-      </form>
-      
-      <div class="chat-footer">
-        <p> Chat instantly - no registration required</p>
-      </div>
-    </div>
+    <a href="https://wa.me/237678192349" target="_blank" class="chat-button whatsapp-float-button" aria-label="Chat on WhatsApp" style="background: linear-gradient(135deg, #25d366, #128c7e); text-decoration: none;">
+      <i class="fab fa-whatsapp"></i>
+    </a>
   </div>
 
   <script src="script.js"></script>
