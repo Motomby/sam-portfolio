@@ -117,6 +117,50 @@ navLinks.forEach(link => {
   });
 });
 
+// ─── Typing Animation for Hero Section ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const typingElement = document.getElementById('typing-effect');
+  if (!typingElement) return;
+  
+  const texts = [
+    "A creative web developer",
+    "A mobile app developer",
+    "A UI/UX designer",
+    "A digital strategist"
+  ];
+  
+  let textIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  
+  function typeWriter() {
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+      typingElement.textContent = currentText.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typingElement.textContent = currentText.substring(0, charIndex + 1);
+      charIndex++;
+    }
+    
+    let typeSpeed = isDeleting ? 50 : 100;
+    
+    if (!isDeleting && charIndex === currentText.length) {
+      typeSpeed = 2000; // Pause at end
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      textIndex = (textIndex + 1) % texts.length;
+      typeSpeed = 500; // Pause before typing new text
+    }
+    
+    setTimeout(typeWriter, typeSpeed);
+  }
+  
+  typeWriter();
+});
+
 // Scroll Spy - Highlight active section
 function highlightNav() {
   const scrollY = window.scrollY;
@@ -295,4 +339,115 @@ projectLinks.forEach(link => {
       console.log('Navigate to project:', card.querySelector('h3').textContent);
     }, 150);
   });
+});
+
+// ─── Typing Animation for Hero Section ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const typingElement = document.getElementById('typing-effect');
+  if (!typingElement) return;
+  
+  const texts = [
+    "A creative web developer",
+    "A mobile app developer",
+    "A UI/UX designer",
+    "A digital strategist"
+  ];
+  
+  let textIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  
+  function typeWriter() {
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+      typingElement.textContent = currentText.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typingElement.textContent = currentText.substring(0, charIndex + 1);
+      charIndex++;
+    }
+    
+    let typeSpeed = isDeleting ? 50 : 100;
+    
+    if (!isDeleting && charIndex === currentText.length) {
+      typeSpeed = 2000; // Pause at end
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      textIndex = (textIndex + 1) % texts.length;
+      typeSpeed = 500; // Pause before typing new text
+    }
+    
+    setTimeout(typeWriter, typeSpeed);
+  }
+  
+  typeWriter();
+});
+
+// ─── Project Filtering Logic ──────────────────────────────────────────────────
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Remove active class from all buttons
+    filterBtns.forEach(button => button.classList.remove('active'));
+    // Add active class to clicked button
+    btn.classList.add('active');
+
+    const filterValue = btn.getAttribute('data-filter');
+
+    projectCards.forEach(card => {
+      if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+        card.classList.remove('hide');
+      } else {
+        card.classList.add('hide');
+      }
+    });
+  });
+});
+
+// ─── Typing Animation for Hero Section ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const typingElement = document.getElementById('typing-effect');
+  if (!typingElement) return;
+  
+  const texts = [
+    "A creative web developer",
+    "A mobile app developer",
+    "A UI/UX designer",
+    "A digital strategist"
+  ];
+  
+  let textIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  
+  function typeWriter() {
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+      typingElement.textContent = currentText.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typingElement.textContent = currentText.substring(0, charIndex + 1);
+      charIndex++;
+    }
+    
+    let typeSpeed = isDeleting ? 50 : 100;
+    
+    if (!isDeleting && charIndex === currentText.length) {
+      typeSpeed = 2000; // Pause at end
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      textIndex = (textIndex + 1) % texts.length;
+      typeSpeed = 500; // Pause before typing new text
+    }
+    
+    setTimeout(typeWriter, typeSpeed);
+  }
+  
+  typeWriter();
 });

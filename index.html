@@ -34,228 +34,403 @@
   </header>
 
   <main>
+    <!-- Hero Section -->
     <section id="home" class="hero-section">
+      <!-- Animated Background Particles -->
+      <div class="particles-container">
+        <div class="particle" style="--i:1;--x:5%;--y:10%;--s:2;"></div>
+        <div class="particle" style="--i:2;--x:15%;--y:20%;--s:3;"></div>
+        <div class="particle" style="--i:3;--x:85%;--y:15%;--s:2.5;"></div>
+        <div class="particle" style="--i:4;--x:75%;--y:30%;--s:3.2;"></div>
+        <div class="particle" style="--i:5;--x:45%;--y:85%;--s:2.8;"></div>
+        <div class="particle" style="--i:6;--x:25%;--y:75%;--s:3.5;"></div>
+        <div class="particle" style="--i:7;--x:90%;--y:80%;--s:2.3;"></div>
+        <div class="particle" style="--i:8;--x:65%;--y:90%;--s:3;"></div>
+      </div>
+      
       <div class="hero-text animate-on-scroll">
         <p class="eyebrow">Hello, I am Engineer Samuel Motomby</p>
         <h1><span class="highlight">A creative web and mobile developer</span></h1>
         <p class="hero-copy">
-          I build interactive websites and mobile applications with clean design, fast performance, and a personal touch.
+          I build interactive websites and mobile applications with clean design, fast performance, and personal touch.
         </p>
         <div class="hero-actions">
-          <a href="#about" class="button primary">Learn More</a>
-          <a href="#contact" class="button secondary">Contact Me</a>
+          <a href="#work" class="button primary glow-button">View My Work</a>
+          <a href="#contact" class="button secondary glow-button">Contact Me</a>
         </div>
       </div>
+      
       <div class="hero-card animate-on-scroll">
+        <!-- Floating Tech Icons -->
+        <div class="hero-floating-icons">
+          <div class="hero-float-icon" style="--delay: 0s; --top: 10%; --left: -20%;"><i class="fab fa-react"></i></div>
+          <div class="hero-float-icon" style="--delay: 0.5s; --top: 30%; --left: 110%;"><i class="fab fa-node-js"></i></div>
+          <div class="hero-float-icon" style="--delay: 1s; --top: 70%; --left: -15%;"><i class="fab fa-python"></i></div>
+          <div class="hero-float-icon" style="--delay: 1.5s; --top: 85%; --left: 105%;"><i class="fas fa-code"></i></div>
+        </div>
+        
         <div class="profile-card">
           <div class="photo-wrap">
             <img src="assets/profile.jpg" alt="Profile photo of Sammy" onerror="this.style.display='none'; this.parentElement.classList.add('empty-profile');" />
           </div>
           <div class="profile-info">
             <h2>samuel motomby</h2>
-            <p> Certification</p>
+            <p>Full-Stack Developer</p>
             <ul>
               <li>Scrum Master</li>
-              <li></li>
-              <li>Modern animations</li>
+              <li>UI/UX Designer</li>
+              <li>Digital Strategist</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="section about-section">
-      <div class="section-header">
-        <span>About Me</span>
-        <h2>Full-Stack Developer</h2>
+      <div class="about-modern animate-on-scroll">
+        <div class="about-background-text">
+          <span class="bg-text-item">CREATOR</span>
+          <span class="bg-text-item">INNOVATOR</span>
+          <span class="bg-text-item">Web Developer</span>
+          <span class="bg-text-item">DESIGNER</span>
+        </div>
+        
+        <div class="about-content">
+          <div class="about-text-section">
+            <span class="about-label">ABOUT ME</span>
+            <h1>Samuel Motomby</h1>
+            <h2>Full-Stack Developer in Cameroon</h2>
+            <p>
+              I'm Samuel, a passionate Full-Stack Developer and Digital Strategist specializing in creating high-performance web applications,
+              intuitive user experiences, and comprehensive digital solutions. With expertise spanning modern JavaScript frameworks,
+              backend technologies, mobile development, and SEO, I transform complex requirements into elegant, scalable solutions.
+            </p>
+            <p>
+              Based in Cameroon, I help businesses across Africa and beyond establish a strong online presence and grow their digital footprint.
+            </p>
+          </div>
+          
+          <div class="about-image-section">
+            <div class="floating-icons">
+              <div class="floating-icon" style="--delay: 0s;"><i class="fab fa-react"></i></div>
+              <div class="floating-icon" style="--delay: 0.5s;"><i class="fab fa-node-js"></i></div>
+              <div class="floating-icon" style="--delay: 1s;"><i class="fab fa-python"></i></div>
+              <div class="floating-icon" style="--delay: 1.5s;"><i class="fab fa-figma"></i></div>
+              <div class="floating-icon" style="--delay: 2s;"><i class="fab fa-wordpress"></i></div>
+              <div class="floating-icon" style="--delay: 2.5s;"><i class="fas fa-code"></i></div>
+              <div class="floating-icon" style="--delay: 3s;"><i class="fas fa-mobile-alt"></i></div>
+              <div class="floating-icon" style="--delay: 3.5s;"><i class="fas fa-chart-line"></i></div>
+            </div>
+            <div class="about-avatar-circle">
+              <img src="assets/profile.jpg" alt="Samuel Motomby" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=&quot;fas fa-user&quot;></i>';" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-stats">
+          <div class="stat-card">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">8+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">30+</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">∞</span>
+            <span class="stat-label">Creativity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Process Section -->
+      <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
+        <span>HOW I WORK</span>
+        <h2>My <span class="highlight">Process</span></h2>
       </div>
       
-      <div class="about-intro animate-on-scroll">
-        <div class="about-avatar-wrap">
-          <div class="about-avatar">
-            <img src="assets/profile.jpg" alt="Samuel Motomby" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=&quot;fas fa-user&quot;></i>';" />
-          </div>
+      <div class="process-grid animate-on-scroll">
+        <div class="process-card">
+          <div class="process-number">01</div>
+          <div class="process-icon"><i class="fas fa-search"></i></div>
+          <h3>Discover</h3>
+          <p>Deep dive into your vision, goals, and audience. I research, ask questions, and map the full picture before a single line of code.</p>
         </div>
-        <div class="about-summary">
-          <h3>Samuel Motomby</h3>
-          <p class="about-tagline">Building scalable web solutions with modern technologies</p>
-          <p>
-            I'm a passionate Full-Stack Developer specializing in creating high-performance web applications 
-            and intuitive user experiences. With expertise in modern JavaScript frameworks, backend technologies, 
-            and mobile development, I transform complex requirements into elegant, scalable solutions.
-          </p>
+        <div class="process-card">
+          <div class="process-number">02</div>
+          <div class="process-icon"><i class="fas fa-palette"></i></div>
+          <h3>Design</h3>
+          <p>Crafting wireframes and high-fidelity mockups that balance aesthetics with function. Every pixel has purpose.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">03</div>
+          <div class="process-icon"><i class="fas fa-code"></i></div>
+          <h3>Develop</h3>
+          <p>Building with modern tools, clean architecture, and performance-first thinking. Accessibility and best practices are baked in from day one.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">04</div>
+          <div class="process-icon"><i class="fas fa-rocket"></i></div>
+          <h3>Deliver</h3>
+          <p>Rigorous testing, optimization, and seamless deployment. The result: a polished experience that exceeds expectations.</p>
         </div>
       </div>
 
-      <div class="about-grid animate-on-scroll">
-        <div class="about-card">
-          <h3><i class="fas fa-code"></i> Technical Expertise</h3>
-          <div class="skill-list">
-            <div class="skill-category">
-              <h4>Frontend Development</h4>
-              <ul>
-                <li>React.js & Next.js for dynamic applications</li>
-                <li>Modern JavaScript (ES6+, TypeScript)</li>
-                <li>HTML5, CSS3, Tailwind CSS</li>
-                <li>Responsive & Mobile-First Design</li>
-              </ul>
-            </div>
-            <div class="skill-category">
-              <h4>Backend Development</h4>
-              <ul>
-                <li>Node.js, Express.js & REST APIs</li>
-                <li>Go for high-performance services</li>
-                <li>Database Design (SQL, NoSQL)</li>
-                <li>PostgreSQL, MongoDB, MySQL</li>
-              </ul>
-            </div>
-            <div class="skill-category">
-              <h4>Mobile Development</h4>
-              <ul>
-                <li>React Native for cross-platform apps</li>
-                <li>Flutter for native mobile experiences</li>
-                <li>Progressive Web Apps (PWA)</li>
-                <li>Mobile UI/UX Best Practices</li>
-              </ul>
-            </div>
+      <!-- Skills & Technologies Section -->
+      <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
+        <span>EXPERTISE</span>
+        <h2>Skills & <span class="highlight">Technologies</span></h2>
+      </div>
+      
+      <div class="skills-section animate-on-scroll">
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span>React / TypeScript</span>
+            <span>90%</span>
+          </div>
+          <div class="skill-progress">
+            <div class="skill-fill" style="width: 90%;"></div>
           </div>
         </div>
-        
-        <div class="about-card">
-          <h3><i class="fas fa-briefcase"></i> Professional Approach</h3>
-          <div class="approach-list">
-            <div class="approach-item">
-              <i class="fas fa-rocket"></i>
-              <div>
-                <h4>Performance-First Development</h4>
-                <p>I prioritize speed, scalability, and efficiency in every project, ensuring optimal user experiences.</p>
-              </div>
-            </div>
-            <div class="approach-item">
-              <i class="fas fa-users"></i>
-              <div>
-                <h4>User-Centric Design</h4>
-                <p>I focus on creating intuitive interfaces that solve real user problems and drive engagement.</p>
-              </div>
-            </div>
-            <div class="approach-item">
-              <i class="fas fa-sync"></i>
-              <div>
-                <h4>Agile Methodology</h4>
-                <p>I work efficiently with Scrum principles, delivering incremental value through iterative development.</p>
-              </div>
-            </div>
-            <div class="approach-item">
-              <i class="fas fa-shield-alt"></i>
-              <div>
-                <h4>Code Quality & Best Practices</h4>
-                <p>I write clean, maintainable code with comprehensive testing and documentation.</p>
-              </div>
-            </div>
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span>Python / Node.js</span>
+            <span>85%</span>
+          </div>
+          <div class="skill-progress">
+            <div class="skill-fill" style="width: 85%;"></div>
           </div>
         </div>
-        
-        <div class="about-card">
-          <h3><i class="fas fa-trophy"></i> Core Strengths</h3>
-          <div class="strengths-list">
-            <div class="strength-item">
-              <span class="strength-icon"></span>
-              <div>
-                <h4>Problem Solving</h4>
-                <p>Analytical thinking to break down complex challenges into manageable solutions.</p>
-              </div>
-            </div>
-            <div class="strength-item">
-              <span class="strength-icon"></span>
-              <div>
-                <h4>Attention to Detail</h4>
-                <p>Meticulous approach to code quality, user experience, and project requirements.</p>
-              </div>
-            </div>
-            <div class="strength-item">
-              <span class="strength-icon"></span>
-              <div>
-                <h4>Continuous Learning</h4>
-                <p>Staying current with emerging technologies and industry best practices.</p>
-              </div>
-            </div>
-            <div class="strength-item">
-              <span class="strength-icon"></span>
-              <div>
-                <h4>Collaboration</h4>
-                <p>Effective communication and teamwork in cross-functional development environments.</p>
-              </div>
-            </div>
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span>WordPress / CMS</span>
+            <span>80%</span>
+          </div>
+          <div class="skill-progress">
+            <div class="skill-fill" style="width: 80%;"></div>
+          </div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span>Canva / Design</span>
+            <span>88%</span>
+          </div>
+          <div class="skill-progress">
+            <div class="skill-fill" style="width: 88%;"></div>
+          </div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span>Digital Strategy</span>
+            <span>75%</span>
+          </div>
+          <div class="skill-progress">
+            <div class="skill-fill" style="width: 75%;"></div>
           </div>
         </div>
       </div>
+
+      <!-- Experience & Growth Section -->
+      <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
+        <span>JOURNEY</span>
+        <h2>Experience & <span class="highlight">Growth</span></h2>
+      </div>
+      
+      <div class="timeline animate-on-scroll">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-role">Junior Engineer</span>
+            <h3>Web App Developer</h3>
+            <span class="timeline-company">queue management systerm</span>
+            <p>Developed functional web applications, handling both frontend and backend tasks to deliver complete digital solutions.</p>
+          </div>
+        </div>
+        <div class="timeline-item right">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-role">Junior Engineer</span>
+            <h3>Web Developer</h3>
+            <span class="timeline-company">Cinch</span>
+            <p>Built responsive websites and focused on improving user experience through clean code and intuitive design.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-role">Freelance & Personal</span>
+            <h3>Full-Stack Creator</h3>
+            <span class="timeline-company">Independent Projects</span>
+            <p>Hands-on experience in real-world projects, delivering custom websites, branding, and digital strategies for various clients.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Section -->
+      <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
+        <span>PRICING PLANS</span>
+        <h2>Transparent <span class="highlight" style="color: #ff6b00;">Pricing</span></h2>
+        <p style="color: var(--muted); max-width: 600px; margin: 0 auto;">We prioritise working within our clients' budget.</p>
+      </div>
+      
+      <div class="pricing-grid animate-on-scroll">
+        <div class="pricing-card">
+          <h3>Basic</h3>
+          <div class="price">$320 <span>one-time</span></div>
+          <p class="pricing-desc">Perfect for small businesses needing a clean online presence.</p>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> 4-Page Landing Page</li>
+            <li><i class="fas fa-check"></i> Responsive Design</li>
+            <li><i class="fas fa-check"></i> Contact Form</li>
+            <li><i class="fas fa-check"></i> Basic SEO Setup</li>
+            <li><i class="fas fa-times"></i> Live Chat Integration</li>
+            <li><i class="fas fa-times"></i> E-commerce Capabilities</li>
+            <li><i class="fas fa-times"></i> Priority Support</li>
+          </ul>
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I'm%20interested%20in%20your%20Basic%20pricing%20plan" class="button secondary">Book Now</a>
+        </div>
+        <div class="pricing-card featured">
+          <span class="most-popular">Most Popular</span>
+          <h3>Silver</h3>
+          <div class="price">$440 <span>one-time</span></div>
+          <p class="pricing-desc">Great for growing businesses that need more pages and engagement.</p>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> 5+ Pages</li>
+            <li><i class="fas fa-check"></i> Responsive Design</li>
+            <li><i class="fas fa-check"></i> Contact Form</li>
+            <li><i class="fas fa-check"></i> Basic SEO Setup</li>
+            <li><i class="fas fa-check"></i> Live Chat Integration</li>
+            <li><i class="fas fa-times"></i> E-commerce Capabilities</li>
+            <li><i class="fas fa-times"></i> Priority Support</li>
+          </ul>
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I'm%20interested%20in%20your%20Silver%20pricing%20plan" class="button primary" style="background: linear-gradient(135deg, #ff6b00, #e05a00);">Book Now</a>
+        </div>
+        <div class="pricing-card">
+          <h3>Gold</h3>
+          <div class="price">$620 <span>one-time</span></div>
+          <p class="pricing-desc">For businesses ready to dominate online and build a full suite.</p>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> 6+ Pages</li>
+            <li><i class="fas fa-check"></i> Full SEO Setup</li>
+            <li><i class="fas fa-check"></i> Logo Design</li>
+            <li><i class="fas fa-check"></i> Live Chat Integration</li>
+            <li><i class="fas fa-check"></i> Google Business Creation</li>
+            <li><i class="fas fa-check"></i> Social Media Integration</li>
+            <li><i class="fas fa-times"></i> Priority Delivery</li>
+          </ul>
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I'm%20interested%20in%20your%20Gold%20pricing%20plan" class="button secondary">Book Now</a>
+        </div>
+        <div class="pricing-card">
+          <h3>Diamond</h3>
+          <div class="price">$885 <span>one-time</span></div>
+          <p class="pricing-desc">The complete package; everything you need to lead your market online.</p>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Unlimited Pages</li>
+            <li><i class="fas fa-check"></i> Full SEO Setup</li>
+            <li><i class="fas fa-check"></i> Logo Design</li>
+            <li><i class="fas fa-check"></i> Live Chat Integration</li>
+            <li><i class="fas fa-check"></i> Google Business Profile</li>
+            <li><i class="fas fa-check"></i> Social Media Integration</li>
+            <li><i class="fas fa-check"></i> 1 Month Free Support</li>
+            <li><i class="fas fa-check"></i> Priority Delivery</li>
+          </ul>
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I'm%20interested%20in%20your%20Diamond%20pricing%20plan" class="button secondary">Book Now</a>
+        </div>
+      </div>
+      <p class="pricing-note animate-on-scroll">All prices are starting rates. Final cost depends on project complexity. Message me for a custom quote.</p>
+
+      <!-- Services Section -->
+      <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
+        <span>WHAT I DO</span>
+        <h2>Web Design Services  <span class="highlight"></span> </h2>
+        <p style="color: var(--muted); max-width: 700px; margin: 0 auto;">From web design in Yaoundé to SEO and e-commerce solutions across Africa, every service is built to help your business grow online.</p>
+      </div>
+      
+      <div class="services-grid animate-on-scroll">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-globe"></i></div>
+          <h3>Web Design & Development </h3>
+          <p>Custom, responsive websites built for businesses in Cameroon and across Africa. From landing pages to full web applications, every site is fast, mobile-first, and built to convert visitors into clients.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> Custom Design</li>
+            <li><i class="fas fa-check"></i> Responsive Layouts</li>
+            <li><i class="fas fa-check"></i> Fast Loading</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>SEO Optimization: Rank #1 on Google</h3>
+          <p>Get your business found on Google. I implement on-page SEO, technical SEO, and content strategies that drive real organic traffic to businesses in Yaoundé, Cameroon, and the wider African market.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> On-Page SEO</li>
+            <li><i class="fas fa-check"></i> Technical SEO</li>
+            <li><i class="fas fa-check"></i> Google Ranking</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-share-alt"></i></div>
+          <h3>Social Media Management</h3>
+          <p>Grow your brand online with consistent, engaging content. Strategy, design, scheduling, and analytics for all major platforms, tailored for the Cameroonian and African market.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> Content Strategy</li>
+            <li><i class="fas fa-check"></i> Post Design</li>
+            <li><i class="fas fa-check"></i> Analytics Reports</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Mobile App Development</h3>
+          <p>Cross-platform mobile apps built with React Native. Smooth, native-feeling experiences for both iOS and Android, deployed for businesses across Cameroon and Africa.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> iOS & Android</li>
+            <li><i class="fas fa-check"></i> React Native</li>
+            <li><i class="fas fa-check"></i> App Store Launch</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-palette"></i></div>
+          <h3>UI/UX Design</h3>
+          <p>User-centred interfaces that look stunning and work intuitively. Wireframes, prototypes, and pixel-perfect designs delivered in Figma, for startups and businesses in Cameroon and beyond.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> Figma Prototypes</li>
+            <li><i class="fas fa-check"></i> User Research</li>
+            <li><i class="fas fa-check"></i> Design Systems</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+          <h3>E-commerce Solutions</h3>
+          <p>Full online stores with product management, secure checkout, and payment integration including Mobile Money. Built for Cameroonian businesses to sell online 24/7.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> Stripe / MoMo Pay</li>
+            <li><i class="fas fa-check"></i> Product Management</li>
+            <li><i class="fas fa-check"></i> Order Dashboard</li>
+          </ul>
+        </div>
+      </div>
+
     </section>
 
+    <!-- Work Section -->
     <section id="work" class="section work-section">
-      <div class="section-header">
-        <span>My Work</span>
-        <h2>Projects I'm proud of</h2>
+      <div class="section-header animate-on-scroll">
+        <span class="section-label">SELECTED WORK</span>
+        <h2>Projects that <span class="highlight">push boundaries</span></h2>
+        <p style="color: var(--muted); margin-top: 1rem;">My project showcase is coming soon! Check back later to see my work.</p>
       </div>
 
-      <div class="projects-grid animate-on-scroll">
-        <div class="project-card">
-          <div class="project-icon">
-            <i class="fas fa-laptop-code"></i>
-          </div>
-          <h3>Portfolio Website</h3>
-          <p>Responsive personal portfolio with smooth animations and modern design. Built with performance and accessibility in mind.</p>
-          <div class="project-tech">
-            <span>HTML5</span>
-            <span>CSS3</span>
-            <span>JavaScript</span>
-          </div>
-          <a href="#" class="project-link">View Project →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-icon">
-            <i class="fas fa-mobile-alt"></i>
-          </div>
-          <h3>Business Directory App</h3>
-          <p>Mobile application for business discovery with intuitive navigation and real-time search functionality.</p>
-          <div class="project-tech">
-            <span>React Native</span>
-            <span>Redux</span>
-            <span>Figma</span>
-          </div>
-          <a href="#" class="project-link">View Project →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-icon">
-            <i class="fas fa-server"></i>
-          </div>
-          <h3>Queue Management System</h3>
-          <p>Enterprise web application with real-time updates, user authentication, and analytics dashboard.</p>
-          <div class="project-tech">
-            <span>Next.js</span>
-            <span>Go</span>
-            <span>PostgreSQL</span>
-          </div>
-          <a href="#" class="project-link">View Project →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-icon">
-            <i class="fas fa-palette"></i>
-          </div>
-          <h3>E-commerce Redesign</h3>
-          <p>Complete UI/UX redesign focusing on user journey optimization and conversion rate improvement.</p>
-          <div class="project-tech">
-            <span>Figma</span>
-            <span>Adobe XD</span>
-            <span>Prototyping</span>
-          </div>
-          <a href="#" class="project-link">View Project →</a>
-        </div>
+      <div class="projects-showcase animate-on-scroll" id="projectsShowcase">
+        <!-- Add your projects here when ready! -->
       </div>
+
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="section contact-section">
       <div class="section-header">
         <span>Contact</span>
@@ -315,5 +490,6 @@
   </div>
 
   <script src="script.js"></script>
+  
 </body>
 </html>

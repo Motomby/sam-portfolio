@@ -44,6 +44,10 @@ app.use((req, _res, next) => {
   next();
 });
 
+// ─── Serve Frontend Files ─────────────────────────────────────────────────────
+const path = require('path');
+app.use(express.static(path.join(__dirname, '..')));
+
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.get('/health', (_req, res) => {
   res.json({
@@ -53,6 +57,10 @@ app.get('/health', (_req, res) => {
     db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
     db_error: global.dbError || null, // EXPOSE THE MONGODB ERROR CLEARLY
   });
+});
+
+app.get('/', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 app.use('/api/contact', contactRoutes);
