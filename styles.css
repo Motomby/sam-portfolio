@@ -54,7 +54,11 @@
 }
 
 .hero-text.animate-on-scroll {
-  animation: slideInLeft 0.8s ease forwards;
+  /* Staggered animations are applied to child elements */
+  opacity: 1;
+  transform: none;
+  animation: none;
+  transition: none;
 }
 
 .hero-card.animate-on-scroll,
@@ -295,6 +299,27 @@ body {
   padding: 5rem 2rem 3rem;
   min-height: calc(100vh - 90px);
   align-items: center;
+  position: relative;
+  background-image: url('assets/profile.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(9, 9, 9, 0.85), rgba(0, 0, 0, 0.7));
+  z-index: 0;
+}
+
+.hero-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-text {
@@ -307,12 +332,18 @@ body {
   letter-spacing: 0.24em;
   color: var(--accent);
   font-size: 0.9rem;
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.2s;
 }
 
 .hero-text h1 {
   margin: 0;
   font-size: clamp(3rem, 5vw, 4.2rem);
   line-height: 0.95;
+  opacity: 0;
+  animation: slideInLeft 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.4s;
 }
 
 .highlight {
@@ -325,12 +356,18 @@ body {
   max-width: 35rem;
   color: var(--muted);
   line-height: 1.8;
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.6s;
 }
 
 .hero-actions {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.8s;
 }
 
 .button {
@@ -374,6 +411,14 @@ body {
   max-width: 420px;
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-card:hover {
+  background: rgba(0, 123, 255, 0.15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 123, 255, 0.25);
+  border-color: rgba(0, 123, 255, 0.6);
 }
 
 .photo-wrap {
@@ -391,6 +436,11 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s ease;
+}
+
+.profile-card:hover .photo-wrap img {
+  transform: scale(1.05);
 }
 
 .photo-wrap.empty-profile::after {
@@ -554,11 +604,14 @@ body {
 }
 
 .contact-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1.4fr;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1.5rem;
-  align-items: start;
+  max-width: 800px;
+  margin: 0 auto;
 }
+
 
 .contact-form {
   display: grid;
@@ -943,6 +996,22 @@ body {
 }
 
 /* ─── Experience Timeline ────────────────────────────────────────────────── */
+.journey-section-wrapper {
+  background-color: #ffffff;
+  padding: 4rem 2rem;
+  margin: 4rem 0;
+  border-radius: 24px;
+}
+.journey-section-wrapper .section-header h2 {
+  color: #111111;
+}
+.journey-section-wrapper .timeline::after {
+  background: rgba(0, 0, 0, 0.1);
+}
+.journey-section-wrapper .timeline-dot {
+  border-color: #ffffff;
+}
+
 .timeline {
   position: relative;
   max-width: 900px;
@@ -994,9 +1063,10 @@ body {
 
 .timeline-content {
   padding: 1.5rem 2rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: #ffffff;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .timeline-role {
@@ -1011,19 +1081,20 @@ body {
 
 .timeline-title {
   font-size: 1.5rem;
-  color: #fff;
+  color: #222222;
   margin: 0 0 0.5rem 0;
 }
 
 .timeline-company {
-  color: var(--muted);
+  color: #555555;
   font-size: 0.95rem;
   margin-bottom: 1rem;
   display: block;
+  font-weight: 500;
 }
 
 .timeline-content p {
-  color: var(--muted);
+  color: #555555;
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
@@ -1406,42 +1477,119 @@ body {
   }
 }
 
-/* ─── Updated Skills Section Classes ────────────────────────────────────────────── */
-.skills-section {
-  max-width: 700px;
+/* ─── Updated Skills Grid Classes ────────────────────────────────────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-.skill-bar {
-  margin-bottom: 1.5rem;
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.skill-bar:hover {
-  transform: translateX(10px);
-  background: rgba(255, 255, 255, 0.03);
+.skill-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(18px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.skill-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.skill-card-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.skill-card-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.skill-item {
+  margin-bottom: 1.5rem;
+}
+
+.skill-item:last-child {
+  margin-bottom: 0;
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #f0f0f0;
+  margin-bottom: 0.6rem;
+}
+
+.skill-info span:last-child {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
 }
 
 .skill-progress {
   width: 100%;
-  height: 8px;
+  height: 6px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 999px;
   overflow: hidden;
-  margin-top: 0.5rem;
 }
 
 .skill-fill {
   height: 100%;
-  background: linear-gradient(90deg, #0056b3, var(--accent));
+  width: 0; /* Starts at 0, animates to var(--target-width) */
   border-radius: 999px;
-  transition: width 1.5s ease, filter 0.3s ease, box-shadow 0.3s ease;
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
 }
 
-.skill-bar:hover .skill-fill {
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+.skills-grid.animate .skill-fill {
+  animation: fillProgress 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.skill-item:nth-child(1) .skill-fill { animation-delay: 0.1s; }
+.skill-item:nth-child(2) .skill-fill { animation-delay: 0.2s; }
+.skill-item:nth-child(3) .skill-fill { animation-delay: 0.3s; }
+.skill-item:nth-child(4) .skill-fill { animation-delay: 0.4s; }
+
+@keyframes fillProgress {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: var(--target-width);
+  }
+}
+
+.skill-item:hover .skill-fill {
   filter: brightness(1.2);
 }
 
@@ -1904,7 +2052,7 @@ body {
 /* ─── Updated Timeline Content Classes ───────────────────────────────────────────────── */
 .timeline-content h3 {
   font-size: 1.4rem;
-  color: #fff;
+  color: #222222;
   margin: 0 0 0.5rem;
 }
 

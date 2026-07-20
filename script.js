@@ -123,10 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!typingElement) return;
   
   const texts = [
-    "A creative web developer",
-    "A mobile app developer",
-    "A UI/UX designer",
-    "A digital strategist"
+    "web and mobile developer",
+    "UI/UX designer",
+    "digital strategist"
   ];
   
   let textIndex = 0;
@@ -225,14 +224,14 @@ async function submitMessage(payload) {
     body:    JSON.stringify(payload),
   })
     .then(r => r.json())
-    .then(data => console.log('[Backend] Save result:', data.success ? '✅ saved' : '⚠️ ' + data.message))
+    .then(data => console.log('[Backend] Save result:', data.success ? 'saved' : data.message))
     .catch(err => console.warn('[Backend] Save failed (non-critical):', err.message));
 
   // ── 3. Return based solely on EmailJS result ───────────────────────────────
   if (emailSent) {
     return {
       success: true,
-      message: "Message sent! I'll get back to you soon. 🚀",
+      message: "Message sent! I'll get back to you soon.",
     };
   }
 
@@ -347,10 +346,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!typingElement) return;
   
   const texts = [
-    "A creative web developer",
-    "A mobile app developer",
-    "A UI/UX designer",
-    "A digital strategist"
+    "web and mobile developer",
+    "UI/UX designer",
+    "digital strategist"
   ];
   
   let textIndex = 0;
@@ -414,10 +412,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!typingElement) return;
   
   const texts = [
-    "A creative web developer",
-    "A mobile app developer",
-    "A UI/UX designer",
-    "A digital strategist"
+    "web and mobile developer",
+    "UI/UX designer",
+    "digital strategist"
   ];
   
   let textIndex = 0;
