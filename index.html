@@ -7,23 +7,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
   <header class="site-header">
     <!-- Brand / Logo -->
-    <a href="#home" class="brand-link" aria-label="Go to top">
-      <img src="assets/Screenshot 2026-05-01 134015.png" alt="Samuel Motomby logo" class="brand-logo" />
-      
+    <a href="#home" class="brand-link" aria-label="Samuel Motomby Homepage">
+      <div class="brand-text">
+        <span class="brand-name">Samuel <span class="brand-accent">Motomby</span></span>
+      </div>
     </a>
 
     <!-- Desktop Nav -->
     <nav class="site-nav" aria-label="Primary navigation">
       <a href="#home" class="nav-link" data-section="home">Home</a>
       <a href="#about" class="nav-link" data-section="about">About</a>
-      <a href="#work" class="nav-link" data-section="work">Work</a>
+      <a href="services.html" class="nav-link" data-section="services">Services</a>
+      <a href="#work" class="nav-link" data-section="work">Projects</a>
+      <a href="#pricing" class="nav-link" data-section="pricing">Pricing</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
       <a href="#contact" class="nav-link" data-section="contact">Contact</a>
       <a href="#contact" class="nav-cta">Hire Me <i class="fas fa-arrow-right"></i></a>
     </nav>
@@ -256,7 +260,7 @@
             <div class="timeline-content">
               <span class="timeline-role">Junior Engineer</span>
               <h3>Web App Developer</h3>
-              <span class="timeline-company">queue management systerm</span>
+              <span class="timeline-company"></span>
               <p>Developed functional web applications, handling both frontend and backend tasks to deliver complete digital solutions.</p>
             </div>
           </div>
@@ -265,7 +269,7 @@
             <div class="timeline-content">
               <span class="timeline-role">Junior Engineer</span>
               <h3>Web Developer</h3>
-              <span class="timeline-company">Cinch</span>
+              <span class="timeline-company">Independent Work</span>
               <p>Built responsive websites and focused on improving user experience through clean code and intuitive design.</p>
             </div>
           </div>
@@ -282,7 +286,7 @@
       </section>
 
       <!-- Pricing Section -->
-      <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
+      <div id="pricing" class="section-header animate-on-scroll" style="margin-top: 4rem;">
         <span>PRICING PLANS</span>
         <h2>Transparent <span class="highlight" style="color: #ff6b00;">Pricing</span></h2>
         <p style="color: var(--muted); max-width: 600px; margin: 0 auto;">We prioritise working within our clients' budget.</p>
@@ -501,6 +505,42 @@
             </a>
           </div>
         </div>
+        <div class="showcase-project">
+          <div class="project-image-area" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%), url('assets/homefinder.jpg') no-repeat center center; background-size: cover;">
+            <span class="project-tag">Real Estate</span>
+            <h3 class="project-title-overlay">HomeFinder</h3>
+          </div>
+          <div class="project-details">
+            <p class="project-description">
+              <strong>HomeFinder</strong> is a property listing web application designed to help users easily discover houses and properties that have been recently listed by administrators. The platform allows users to browse available properties, view detailed information such as property descriptions, prices, locations, and images, and find suitable homes based on their preferences.
+              <br><br>
+              Administrators can add, update, and manage property listings through the system. The application was developed using <strong>React.js</strong> for the frontend, <strong>Node.js</strong> for the backend, and <strong>MongoDB</strong> for database management, providing a responsive and efficient platform for property discovery and management.
+            </p>
+            <div class="project-tags">
+              <span class="tag">React.js</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-project">
+          <div class="project-image-area" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%), url('assets/zoza.jpg') no-repeat center center; background-size: cover;">
+            <span class="project-tag">Kids Education</span>
+            <h3 class="project-title-overlay">Zoza</h3>
+          </div>
+          <div class="project-details">
+            <p class="project-description">
+              <strong>Zoza</strong> is an educational web platform designed to help children aged 5 to 15 years learn and improve their knowledge in Mathematics, Science, and Bible Stories. The platform provides age-appropriate learning materials and interactive lessons that make learning engaging and enjoyable for children.
+              <br><br>
+              It was developed using <strong>React.js</strong> for the frontend, <strong>Node.js</strong> for the backend, and <strong>MongoDB</strong> for storing and managing learning content and user information.
+            </p>
+            <div class="project-tags">
+              <span class="tag">React.js</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+            </div>
+          </div>
+        </div>
       </div>
 
     </section>
@@ -545,7 +585,188 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Sammy Dev taking tech to the next level.</p>
+    <div class="footer-top-cta">
+      <div class="footer-cta-container">
+        <div class="footer-cta-text">
+          <h2>Ready to build something extraordinary?</h2>
+          <p>Let's turn your vision into a high-performance web or mobile application.</p>
+        </div>
+        <div class="footer-cta-actions">
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I%20have%20a%20project%20in%20mind." target="_blank" class="button primary glow-button">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+          <a href="#contact" class="button secondary">Send a Message</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Pricing Plans Section -->
+    <div class="footer-pricing-wrapper">
+      <div class="footer-section-header">
+        <span class="footer-badge"><i class="fas fa-tags"></i> PRICING PLANS</span>
+        <h2>Transparent & Budget-Friendly <span class="highlight">Packages</span></h2>
+        <p>We prioritize working within our clients' budget to deliver maximal value.</p>
+      </div>
+      
+      <div class="pricing-grid footer-pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <h3>Basic</h3>
+            <div class="price">$320 <span>one-time</span></div>
+            <p class="pricing-desc">Perfect for small businesses needing a clean online presence.</p>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> 4-Page Landing Page</li>
+            <li><i class="fas fa-check"></i> Responsive Design</li>
+            <li><i class="fas fa-check"></i> Contact Form Integration</li>
+            <li><i class="fas fa-check"></i> Basic SEO Setup</li>
+            <li class="disabled"><i class="fas fa-times"></i> Live Chat Integration</li>
+            <li class="disabled"><i class="fas fa-times"></i> E-commerce Capabilities</li>
+          </ul>
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I'm%20interested%20in%20your%20Basic%20pricing%20plan" target="_blank" class="button secondary flex-button">
+            <span>Book Basic Plan</span> <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="featured-badge"><i class="fas fa-fire"></i> Most Popular</div>
+          <div class="pricing-card-header">
+            <h3>Silver</h3>
+            <div class="price">$450 <span>one-time</span></div>
+            <p class="pricing-desc">Great for growing businesses that need more pages & engagement.</p>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> 5+ Custom Pages</li>
+            <li><i class="fas fa-check"></i> Responsive & Fast Design</li>
+            <li><i class="fas fa-check"></i> Contact & Booking Form</li>
+            <li><i class="fas fa-check"></i> Basic SEO Setup</li>
+            <li><i class="fas fa-check"></i> Live Chat Integration</li>
+            <li class="disabled"><i class="fas fa-times"></i> E-commerce Capabilities</li>
+          </ul>
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I'm%20interested%20in%20your%20Silver%20pricing%20plan" target="_blank" class="button primary glow-button flex-button" style="background: linear-gradient(135deg, #ff6b00, #e05a00);">
+            <span>Book Silver Plan</span> <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <h3>Gold</h3>
+            <div class="price">$720 <span>one-time</span></div>
+            <p class="pricing-desc">For businesses ready to dominate online with a full digital suite.</p>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> 6+ Custom Pages</li>
+            <li><i class="fas fa-check"></i> Full SEO Strategy</li>
+            <li><i class="fas fa-check"></i> Logo & Brand Design</li>
+            <li><i class="fas fa-check"></i> Live Chat & WhatsApp Integration</li>
+            <li><i class="fas fa-check"></i> Google Business Profile Setup</li>
+            <li><i class="fas fa-check"></i> Social Media Links</li>
+          </ul>
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I'm%20interested%20in%20your%20Gold%20pricing%20plan" target="_blank" class="button secondary flex-button">
+            <span>Book Gold Plan</span> <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <h3>Diamond</h3>
+            <div class="price">$1450 <span>one-time</span></div>
+            <p class="pricing-desc">The complete enterprise package to dominate your market online.</p>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Unlimited Custom Pages</li>
+            <li><i class="fas fa-check"></i> Complete Advanced SEO</li>
+            <li><i class="fas fa-check"></i> E-commerce & MoMo Payments</li>
+            <li><i class="fas fa-check"></i> Custom Web/Mobile Application</li>
+            <li><i class="fas fa-check"></i> Google Business & Social Profile</li>
+            <li><i class="fas fa-check"></i> 1 Month Free Maintenance</li>
+          </ul>
+          <a href="https://wa.me/237678192349?text=Hi%20Samuel!%20I'm%20interested%20in%20your%20Diamond%20pricing%20plan" target="_blank" class="button secondary flex-button">
+            <span>Book Diamond Plan</span> <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <p class="pricing-note">Rates listed above are standard base rates. Custom project scopes available upon request.</p>
+    </div>
+
+    <!-- Multi-Column Links -->
+    <div class="footer-columns">
+      <div class="footer-col brand-col">
+        <a href="#home" class="brand-link">
+          <div class="brand-text">
+            <span class="brand-name">Samuel <span class="brand-accent">Motomby</span></span>
+          </div>
+        </a>
+        <p class="footer-bio">
+          Passionate Full-Stack Developer & Digital Strategist in Cameroon helping startups, brands, and enterprises launch high-impact web and mobile applications.
+        </p>
+        <div class="footer-socials">
+          <a href="https://wa.me/237678192349" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/Samuel Ekema" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/ekema_samuel1" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="tel:+237678192349" aria-label="Phone"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#about"><i class="fas fa-chevron-right"></i> About Me</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+          <li><a href="#work"><i class="fas fa-chevron-right"></i> Projects</a></li>
+          <li><a href="#pricing"><i class="fas fa-chevron-right"></i> Pricing Plans</a></li>
+          <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog & Insights</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Me</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html#web-dev"><i class="fas fa-check"></i> Web Design & Development</a></li>
+          <li><a href="services.html#mobile-dev"><i class="fas fa-check"></i> Mobile App Development</a></li>
+          <li><a href="services.html#seo"><i class="fas fa-check"></i> SEO Optimization (#1 Google)</a></li>
+          <li><a href="services.html#ecommerce"><i class="fas fa-check"></i> E-Commerce & MoMo Pay</a></li>
+          <li><a href="services.html#uiux"><i class="fas fa-check"></i> UI/UX Figma Design</a></li>
+          <li><a href="services.html#social"><i class="fas fa-check"></i> Social Media Management</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col contact-col">
+        <h4>Get In Touch</h4>
+        <ul class="footer-contact-list">
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:motombysamuel843@gmail.com">motombysamuel843@gmail.com</a>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <a href="tel:+237678192349">+237 678192349</a>
+          </li>
+          <li>
+            <i class="fab fa-whatsapp"></i>
+            <a href="https://wa.me/237678192349" target="_blank">+237 678192349</a>
+          </li>
+          <li>
+            <i class="fas fa-location-dot"></i>
+            <span>Yaoundé, Cameroon</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Samuel Motomby. All rights reserved. </p>
+      <div class="footer-bottom-links">
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
+        <a href="faq.html">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
   </footer>
 
   <!-- WhatsApp Widget -->
@@ -555,7 +776,7 @@
     </a>
   </div>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
   
 </body>
 </html>
